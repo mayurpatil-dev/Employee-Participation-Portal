@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import SuggestionForm from '../components/SuggestionForm';
 
 function MainComponent() {
   const [employeeName, setEmployeeName] = React.useState("");
