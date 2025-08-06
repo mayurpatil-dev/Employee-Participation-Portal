@@ -331,6 +331,11 @@ function MainComponent() {
           </div>
         </div>
 
+        {/* Suggestion Box Section */}
+        <div className="max-w-4xl mx-auto px-2 sm:px-3 md:px-4 mt-6 sm:mt-8">
+          <SuggestionForm />
+        </div>
+
         {/* Footer */}
         <footer className="text-center py-3 sm:py-4 px-2 sm:px-4 mt-6 sm:mt-8 bg-white/60 backdrop-blur-sm">
           <div className="max-w-4xl mx-auto">
