@@ -232,25 +232,43 @@ function MainComponent() {
             </div>
 
             <div className="space-y-4 sm:space-y-5">
-              {/* Employee Name Input */}
-              <div>
-                <label className="block text-gray-900 font-semibold text-xs sm:text-sm mb-1 sm:mb-2">
-                  Employee Full Name
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-2 sm:pl-3 pointer-events-none">
-                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
+              {/* Employee Name and Suggestion Box */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {/* Employee Name Input */}
+                <div>
+                  <label className="block text-gray-900 font-semibold text-xs sm:text-sm mb-1 sm:mb-2">
+                    Employee Full Name
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-2 sm:pl-3 pointer-events-none">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>
+                    <input
+                      type="text"
+                      value={employeeName}
+                      onChange={(e) => setEmployeeName(e.target.value)}
+                      placeholder="Enter employee full name"
+                      className="w-full pl-8 sm:pl-10 px-2 sm:px-3 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-xs sm:text-sm"
+                      maxLength={50}
+                    />
                   </div>
-                  <input
-                    type="text"
-                    value={employeeName}
-                    onChange={(e) => setEmployeeName(e.target.value)}
-                    placeholder="Enter employee full name"
-                    className="w-full pl-8 sm:pl-10 px-2 sm:px-3 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-xs sm:text-sm"
-                    maxLength={50}
-                  />
+                </div>
+
+                {/* Suggestion Box - moved here */}
+                <div>
+                  <label className="block text-gray-900 font-semibold text-xs sm:text-sm mb-1 sm:mb-2">
+                    Suggest Innovative Idea In Renewable Energy
+                  </label>
+                  <div className="space-y-3">
+                    <textarea
+                      id="suggestion-text"
+                      rows={4}
+                      placeholder="Share your ideas about environment, renewable energy, or workplace improvements..."
+                      className="w-full px-2 sm:px-3 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-xs sm:text-sm"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -330,12 +348,40 @@ function MainComponent() {
               </div>
             </div>
           </div>
+
+          {/* HR View Section */}
+          <div className="bg-white/60 backdrop-blur-sm rounded-lg p-3 sm:p-5 shadow-md">
+            <div className="flex items-start gap-2 sm:gap-3">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-blue-600 font-bold text-xs sm:text-sm">HR</span>
+              </div>
+              <div>
+                <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1 sm:mb-2">
+                  HR View
+                </h3>
+                <p className="text-gray-800 text-xs sm:text-sm mb-3 sm:mb-4">
+                  HR access to download saved suggestions and participation data.
+                </p>
+                <button 
+                  onClick={() => {
+                    const passcode = prompt("Enter passcode to download suggestions:");
+                    if (passcode === "1001") {
+                      window.open(`/api/download-suggestions?passcode=${passcode}`, '_blank');
+                    } else {
+                      alert("Invalid passcode!");
+                    }
+                  }}
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 sm:px-5 rounded-lg shadow-md transition-colors duration-200 text-sm"
+                >
+                  Download Suggestions (HR Access)
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Suggestion Box Section */}
-        <div className="max-w-4xl mx-auto px-2 sm:px-3 md:px-4 mt-6 sm:mt-8">
-          <SuggestionForm />
-        </div>
+        {/* Suggestion Box Section - REMOVED as requested */}
+        {/* This section was removed to eliminate the Suggestion Box below About the Solar Plant Inauguration */}
 
         {/* Footer */}
         <footer className="text-center py-3 sm:py-4 px-2 sm:px-4 mt-6 sm:mt-8 bg-white/60 backdrop-blur-sm">
