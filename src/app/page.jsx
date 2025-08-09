@@ -7,8 +7,49 @@ function MainComponent() {
   const [isAgreed, setIsAgreed] = React.useState(false);
   const [showCertificate, setShowCertificate] = React.useState(false);
 
+  const handleConfirmParticipation = () => {
+    fetch("https://script.google.com/macros/s/AKfycbyEwzr9RvrZIh7vdjaKmA9y7I-YStR_IJrE3O0kzeLV7vMu1qP14yluBYAPdRTJMg2Q/exec", {
+      method: "POST",
+      mode: "no-cors", // no-cors avoids CORS blocking
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: employeeName,
+        suggestion: document.getElementById("suggestion-text")?.value || "",
+      }),
+    })
+      .then(() => {
+        console.log("Data sent to Google Sheets");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   const generateCertificate = () => {
     if (employeeName && isAgreed) {
+      // Send data to Google Apps Script
+      fetch("https://script.google.com/macros/s/AKfycbyEwzr9RvrZIh7vdjaKmA9y7I-YStR_IJrE3O0kzeLV7vMu1qP14yluBYAPdRTJMg2Q/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+          name: employeeName,
+          suggestion: document.getElementById("suggestion-text")?.value || "",
+        }),
+      })
+        .then(() => {
+          console.log("Data sent to Google Sheets");
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+
+      // Continue with certificate generation
       setShowCertificate(true);
       // Scroll to certificate preview
       setTimeout(() => {
